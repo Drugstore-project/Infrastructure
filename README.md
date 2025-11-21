@@ -7,7 +7,7 @@ Este é o microsserviço de autenticação do Drugstore Project.
 1.  **Crie um novo repositório no GitHub** apenas para este serviço (ou use um monorepo, mas configure o Root Directory).
     *   Se for um repositório separado:
         ```bash
-        cd Drugstore_Project/Auth_Service
+        # Estando na pasta Infrastructure
         git init
         git add .
         git commit -m "Initial commit Auth Service"
@@ -19,14 +19,14 @@ Este é o microsserviço de autenticação do Drugstore Project.
 
 3.  **Crie um novo Web Service**.
 
-4.  **Conecte ao seu repositório GitHub**.
+4.  **Conecte ao seu repositório GitHub** (o repositório Infrastructure).
 
 5.  **Configure o serviço**:
     *   **Name**: `drugstore-auth`
     *   **Runtime**: `Docker`
     *   **Region**: Escolha a mais próxima (ex: Ohio ou Frankfurt).
-    *   **Branch**: `main`
-    *   **Root Directory**: `.` (se for repo separado) ou `Drugstore_Project/Auth_Service` (se for monorepo).
+    *   **Branch**: `main` (ou a branch que você estiver usando)
+    *   **Root Directory**: `.` (pois o Dockerfile está na raiz deste repositório).
 
 6.  **Variáveis de Ambiente (Environment Variables)**:
     Adicione as seguintes variáveis no Render:
