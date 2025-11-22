@@ -2,15 +2,19 @@
 Security utilities for password hashing and JWT token management.
 """
 from datetime import datetime, timedelta, timezone
-from passlib.hash import bcrypt
+import bcrypt
 from jose import jwt
 from app.config import settings
 
 def hash_password(plain: str) -> str:
-    return bcrypt.hash(plain)
+    # Generate a salt and hash the password
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(plain.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return bcrypt.verify(plain, hashed)
+    # Check the password against the hash
+    return bcrypt.checkpw(plain.encode('utf-8'), hashed.encode('utf-8'))
 
 def create_access_token(
     subject: str,
