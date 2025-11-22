@@ -2,6 +2,7 @@
 Main entry point for Auth Service.
 """
 from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from app.database import get_db, Base, engine
@@ -10,6 +11,14 @@ from app.crud import create_user, get_user_by_email
 from app.security import verify_password, create_access_token
 
 app = FastAPI(title="Auth Service")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Ensure tables exist (in a real microservice, use Alembic)
 Base.metadata.create_all(bind=engine)
