@@ -1,8 +1,42 @@
-# Auth Service
+# Drugstore Project - Infrastructure & Auth Service
 
-Este é o microsserviço de autenticação do Drugstore Project.
+## 📋 Sobre o Projeto
+Este diretório contém a **Infraestrutura** e o **Microsserviço de Autenticação** do sistema **PharmaCare**. 
+Seguindo as boas práticas de arquitetura de microsserviços, a autenticação foi desacoplada do backend principal para garantir maior segurança, escalabilidade e independência.
 
-## Como implantar no Render
+Este serviço é responsável por:
+- Gerenciar o ciclo de vida dos usuários (Cadastro, Login).
+- Emitir tokens de acesso (JWT) seguros.
+- Validar credenciais.
+
+## 🚀 Tecnologias Utilizadas
+- **Linguagem:** Python 3.10+
+- **Framework:** FastAPI
+- **Banco de Dados:** PostgreSQL (Conectado ao mesmo banco ou instância separada)
+- **Autenticação:** JWT (JSON Web Tokens) + Passlib (Hashing)
+- **Containerização:** Docker
+- **Deploy:** Render (PaaS)
+
+## 📂 Estrutura
+- `app/`: Código fonte do serviço de autenticação.
+- `Dockerfile`: Configuração para containerização do serviço.
+- `requirements.txt`: Dependências do projeto.
+
+## 🐳 Como Rodar Localmente (Docker)
+
+1. **Navegue até a pasta:**
+   ```bash
+   cd Drugstore_Project/Infrastructure/Infrastructure
+   ```
+
+2. **Construa e inicie o container:**
+   ```bash
+   docker build -t drugstore-auth .
+   docker run -p 8001:8000 --env-file .env drugstore-auth
+   ```
+   *Nota: Certifique-se de ter um arquivo `.env` configurado com as credenciais do banco.*
+
+## ☁️ Como implantar no Render (Produção)
 
 1.  **Crie um novo repositório no GitHub** apenas para este serviço (ou use um monorepo, mas configure o Root Directory).
     *   Se for um repositório separado:
@@ -40,8 +74,8 @@ Este é o microsserviço de autenticação do Drugstore Project.
 
 7.  **Deploy**: Clique em "Create Web Service".
 
-## Endpoints
+## 🔗 Endpoints Principais
 
 *   `POST /auth/register`: Cria um novo usuário.
-*   `POST /auth/login`: Retorna um token JWT.
-*   `GET /health`: Verifica se o serviço está online.
+*   `POST /auth/login`: Autentica e retorna um token JWT.
+*   `GET /health`: Verifica a saúde do serviço.
