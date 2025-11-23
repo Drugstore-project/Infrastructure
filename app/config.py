@@ -24,6 +24,10 @@ class Settings:
 
     @property
     def database_url(self) -> str:
+        # If DATABASE_URL is explicitly set (e.g. Railway), use it.
+        if os.getenv("DATABASE_URL"):
+            return os.getenv("DATABASE_URL")
+            
         return (
             f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
